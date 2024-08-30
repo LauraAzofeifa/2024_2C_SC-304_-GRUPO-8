@@ -4,12 +4,16 @@
  */
 package n1.proyectofinal;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Laura
  */
-public class ListaParticipantesDobleEnlazada {
-    
+public class ListaParticipantesDobleEnlazada implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     private NodoParticipante inicio;
     private NodoParticipante cola;
 
@@ -18,13 +22,18 @@ public class ListaParticipantesDobleEnlazada {
         this.cola = null;
     }
 
+    // Método para obtener el nodo inicial de la lista
+    public NodoParticipante getInicio() {
+        return inicio;
+    }
+
     // Método para agregar un participante al final de la lista
     public void agregarParticipante(Participante participante) {
         NodoParticipante nuevoNodo = new NodoParticipante(participante);
         if (inicio == null) {
             inicio = cola = nuevoNodo;
         } else {
-            cola.setSiguiente(nuevoNodo); 
+            cola.setSiguiente(nuevoNodo);
             nuevoNodo.setAnterior(cola);
             cola = nuevoNodo;
         }
@@ -68,8 +77,8 @@ public class ListaParticipantesDobleEnlazada {
             actual = actual.getAnterior();
         }
     }
-    
-     // Método recursivo para imprimir la lista desde el inicio
+
+    // Método recursivo para imprimir la lista desde el inicio
     public void imprimirDesdeInicioRecursivo() {
         imprimirDesdeInicioRecursivo(this.inicio);
     }
@@ -80,8 +89,8 @@ public class ListaParticipantesDobleEnlazada {
             imprimirDesdeInicioRecursivo(nodo.getSiguiente());
         }
     }
-    
-      // Método recursivo para buscar un participante por nombre
+
+    // Método recursivo para buscar un participante por nombre
     public Participante buscarParticipanteRecursivo(String nombre) {
         return buscarParticipanteRecursivo(this.inicio, nombre);
     }
@@ -94,6 +103,28 @@ public class ListaParticipantesDobleEnlazada {
             return nodo.getParticipante(); // Encontrado
         }
         return buscarParticipanteRecursivo(nodo.getSiguiente(), nombre); // Seguir buscando
+    }
+
+    // Método para eliminar un participante por ID
+    public void eliminarParticipantePorId(int id) {
+        NodoParticipante actual = inicio;
+
+        while (actual != null) {
+            if (actual.getParticipante().getID() == id) {
+                if (actual.getAnterior() != null) {
+                    actual.getAnterior().setSiguiente(actual.getSiguiente());
+                } else {
+                    inicio = actual.getSiguiente();
+                }
+                if (actual.getSiguiente() != null) {
+                    actual.getSiguiente().setAnterior(actual.getAnterior());
+                } else {
+                    cola = actual.getAnterior();
+                }
+                break;
+            }
+            actual = actual.getSiguiente();
+        }
     }
 
 }

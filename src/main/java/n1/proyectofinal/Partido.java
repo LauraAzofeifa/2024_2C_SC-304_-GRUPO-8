@@ -4,11 +4,16 @@
  */
 package n1.proyectofinal;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Laura
  */
-public class Partido {
+public class Partido implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     private String equipo1;
     private String equipo2;
     private String resultado;
@@ -50,7 +55,5 @@ public class Partido {
                 + "\\nEquipo2=" + equipo2 
                 + "\\nResultado=" + resultado ;
     }
-    
-    
 }
 

@@ -4,11 +4,14 @@
  */
 package n1.proyectofinal;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Laura
  */
-public class PilaDePartidos {
+public class PilaDePartidos implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private NodoPartido cabeza;
 
@@ -50,6 +53,11 @@ public class PilaDePartidos {
         } else {
             return this.cabeza.getPartido();
         }
+    }
+
+    // Método para obtener el nodo en la cima de la pila
+    public NodoPartido obtenerNodoFrente() {
+        return this.cabeza;
     }
 
     // Método para imprimir los partidos en la pila

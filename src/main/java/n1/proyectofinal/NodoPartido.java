@@ -4,11 +4,16 @@
  */
 package n1.proyectofinal;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Laura
  */
-public class NodoPartido {
+public class NodoPartido implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
 
     private Partido partido;
     private NodoPartido siguiente;

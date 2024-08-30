@@ -4,30 +4,32 @@
  */
 package n1.proyectofinal;
 
-import java.util.Date;
-
 /**
  *
  * @author Laura
  */
-public class Evento {
+import java.io.Serializable;
+
+public class Evento implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private int ID;
     private String nombre;
-    private Date fecha;
+    private String fecha;
     private String ubicacion;
     private ListaParticipantesDobleEnlazada lista;
     private ColaDePartidos colapartidos;
     private PilaDePartidos historial;
 
-    public Evento(int ID, String nombre, Date fecha, String ubicacion, ListaParticipantesDobleEnlazada lista, ColaDePartidos colapartidos, PilaDePartidos historial) {
+    public Evento(int ID, String nombre, String fecha, String ubicacion, ListaParticipantesDobleEnlazada lista, ColaDePartidos colapartidos, PilaDePartidos historial) {
         this.ID = ID;
         this.nombre = nombre;
         this.fecha = fecha;
         this.ubicacion = ubicacion;
-        this.lista = lista;
-        this.colapartidos = colapartidos;
-        this.historial = historial;
+        this.lista = lista != null ? lista : new ListaParticipantesDobleEnlazada(); // Inicializar como lista vacía si es null
+        this.colapartidos = colapartidos != null ? colapartidos : new ColaDePartidos(); // Inicializar como cola vacía si es null
+        this.historial = historial != null ? historial : new PilaDePartidos(); // Inicializar como pila vacía si es null
     }
 
     public int getID() {
@@ -46,11 +48,11 @@ public class Evento {
         this.nombre = nombre;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 
@@ -86,16 +88,9 @@ public class Evento {
         this.historial = historial;
     }
 
-  
     @Override
     public String toString() {
-        return "Evento:"
-                + "\\nID=" + ID
-                + "\\Nombre=" + nombre
-                + "\\nFecha=" + fecha
-                + "\\nUbicacion=" + ubicacion
-                + "\\nLista=" + lista.toString()
-                + "\\nPartidos=" + colapartidos.toString();
+        return "ID " + ID
+                + " Nombre=" + nombre;
     }
-
 }

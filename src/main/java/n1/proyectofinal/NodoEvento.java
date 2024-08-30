@@ -8,8 +8,11 @@ package n1.proyectofinal;
  *
  * @author Laura
  */
-public class NodoEvento {
+import java.io.Serializable;
 
+public class NodoEvento implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     private Evento evento;
     private NodoEvento siguiente;
 
@@ -33,7 +36,5 @@ public class NodoEvento {
     public void setSiguiente(NodoEvento siguiente) {
         this.siguiente = siguiente;
     }
-    
-    
 
 }

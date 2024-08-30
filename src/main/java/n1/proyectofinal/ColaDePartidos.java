@@ -4,11 +4,16 @@
  */
 package n1.proyectofinal;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Laura
  */
-public class ColaDePartidos {
+public class ColaDePartidos implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
 
     private NodoPartido cabeza;
     private NodoPartido cola;
@@ -65,4 +70,9 @@ public class ColaDePartidos {
             actual = actual.getSiguiente();
         }
     }
+
+    public NodoPartido obtenerNodoFrente() {
+        return cabeza;  // Devuelve el primer nodo en la cola, que es la cabeza
+    }
+
 }
